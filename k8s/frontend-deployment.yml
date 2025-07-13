@@ -1,5 +1,5 @@
-apiVersion: apps/v1
 kind: Deployment
+apiVersion: apps/v1
 metadata:
   name: frontend-deployment
   namespace: chat-app
@@ -10,20 +10,23 @@ spec:
       app: frontend
   template:
     metadata:
-      name: frontend-pod
+      name: frontend
       namespace: chat-app
-      labels: 
+      labels:
         app: frontend
     spec:
       containers:
-      - name: chatapp-frontend
-        image: trainwithshubham/chatapp-frontend
-        ports:
-        - containerPort: 80
-        env:
-        - name: NODE_ENV
-          value: production
-          
-
-
-
+        - name: chatapp-frontend
+          image: dockerbappa/chatapp-frontapp:latest
+          ports:
+            - containerPort: 80
+          env:
+            - name: NODE_ENV
+              value: "production"
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
